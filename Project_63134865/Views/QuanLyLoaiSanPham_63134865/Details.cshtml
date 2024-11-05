@@ -1,0 +1,34 @@
+﻿@model Project_63134865.Models.LoaiSanPham
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutQuanLy_63134865.cshtml";
+}
+
+<h3 style="color: #0094ff ; font-size: 30px; font:bold; ">Chi tiết</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Loại sản phẩm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLSP)
+        </dd>
+
+        <dt>
+            Danh mục
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DanhMuc.TenDM)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaLSP }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>

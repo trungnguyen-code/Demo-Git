@@ -1,0 +1,58 @@
+﻿@model Project_63134865.Models.HangSanXuat
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutQuanLy_63134865.cshtml";
+}
+
+<h2 style="color: #0094ff ; font-size: 30px; font:bold; ">Chi tiết</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Hãng sản xuất
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenHSX)
+        </dd>
+
+        <dt>
+            Số điện thoại
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SdtHSX)
+        </dd>
+
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailHSX)
+        </dd>
+
+        <dt>
+            Địa chỉ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChiHSX)
+        </dd>
+
+        <dt>
+            Ảnh
+        </dt>
+
+        <dd>
+            <img src="@Model.AnhHSX" width="100" height="100" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaHSX }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>

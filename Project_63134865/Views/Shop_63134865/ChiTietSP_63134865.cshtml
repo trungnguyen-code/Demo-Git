@@ -1,0 +1,143 @@
+﻿@model Project_63134865.Models.SanPham
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Chi tiet";
+    Layout = "~/Views/Shared/_LayoutShop_63134865.cshtml";
+}
+@{
+    Project_63134865.Models.Project_63134865Entities db = new Project_63134865.Models.Project_63134865Entities();
+}
+<div class="single">
+    <div class="container left">
+        <div class="single-top">
+            <div class="col-md-5 single-top">
+                <div class="single-w3agile">
+                    <div id="picture-frame">
+                        <img src="@Model.AnhSP" data-src="@Model.AnhSP" alt="" class="img-responsive" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        @{
+            int newPrice = Int32.Parse(Model.GiaSP) - ((Int32.Parse(Model.GiaSP) * Model.GiamGiaSP.Value) / 100);
+        }
+        <div class="col-md-7 single-top-left ">
+            <div class="single-right">
+                <h3>@Model.TenSP</h3>
+                <p style="font-size:20px;">Size: @Model.SizeSP</p>
+                <div class="pr-single">
+                    <p class="reduced " style="font-size:29px; color: #4099ff !important; font:bold; ">@newPrice.ToString() VNĐ</p>
+                </div>
+                <div class="block block-w3">
+                    <div class="starbox small ghosting">
+                        @if (db.TiLes.Find(Model.MaSP) != null)
+                        {
+                            for (int i = 0; i < db.TiLes.Find(Model.MaSP).TiLeSao; i++)
+                            {
+                                <img src="~/Image/star.png" style="background-color:rgb(255, 172, 0);" />
+                            }
+                            for (int i = 0; i < 5 - db.TiLes.Find(Model.MaSP).TiLeSao; i++)
+                            {
+                                <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 5; i++)
+                            {
+                                <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                            }
+                        }
+                    </div>
+                </div>
+                <p class="in-pa">Mô tả: @Model.MieuTaSP </p>
+                <div class="add add-3">
+                    <a class="btn btn-info py-5 px-1" href="@Url.Action("ThemVaoGio", "Shop_63134865", new { SanPhamID = Model.MaSP })"> <span class=""></span>  Thêm vào giỏ </a>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+        <!--TIêu đề-->
+        <div class="spec " style="margin-top:30px;">
+            <h3 style=" color: #4099ff !important; ">Sản phẩm cùng hãng @Model.HangSanXuat.TenHSX </h3>
+            <div class="ser-t">
+                <b></b>
+            </div>
+        </div>
+        <!--Sản phẩm-->
+        <div class="tab-head ">
+            <div class=" tab-content tab-content-t ">
+                <div class="tab-pane active text-style" id="tab1">
+                    <div class=" con-w3l">
+                        @{int box = 0;}
+                        @foreach (var item in db.SanPhams.SqlQuery("SELECT * FROM SanPham  WHERE MaHSX=" + Model.MaHSX + " ORDER BY CapNhatNgayThangSP DESC"))
+                        {
+                            box++;
+                            if (box > 4)
+                            {
+                                break;
+                            }
+                            int newPrice1 = Int32.Parse(item.GiaSP) - ((Int32.Parse(item.GiaSP) * item.GiamGiaSP.Value) / 100);
+                            <div class="col-md-3 m-wbox" style="margin-bottom:30px;">
+                                <div class="col-m">
+                                    <a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })" class="offer-img">
+                                        <img src="@item.AnhSP" width="150" height="250" alt="@item.AnhSP">
+
+                                    </a>
+                                    <div class="mid-1">
+                                        <div class="">
+                                            @if (item.TenSP.Length > 25)
+                                            {
+                                                <h6><a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })" data-toggle="tooltip" title="@item.TenSP">@item.TenSP.Substring(0, 25)...</a></h6>
+                                            }
+                                            else
+                                            {
+                                                <h6><a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })">@item.TenSP</a></h6>
+                                            }
+                                        </div>
+                                        (Size: @item.SizeSP)
+                                        <div class="mid-2">
+                                            <p><em class="item_price">@newPrice1.ToString() VNĐ</em></p>
+                                            <div class="clearfix"></div>
+                                            <div class="block">
+                                                @if (db.TiLes.Find(item.MaSP) != null)
+                                                {
+                                                    for (int i = 0; i < db.TiLes.Find(item.MaSP).TiLeSao; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:rgb(255, 172, 0);" />
+                                                    }
+                                                    for (int i = 0; i < 5 - db.TiLes.Find(item.MaSP).TiLeSao; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int i = 0; i < 5; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                            </div>
+                                            <div>
+                                                <a href="#"><img src="@item.HangSanXuat.AnhHSX" width="20" height="20" /> @item.HangSanXuat.TenHSX</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="add">
+                                            <a class="btn btn-info px-1 py-5 " href="@Url.Action("ThemVaoGio", "Shop_63134865", new { SanPhamID = item.MaSP })"> <span class=""></span>  Thêm vào giỏ </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+

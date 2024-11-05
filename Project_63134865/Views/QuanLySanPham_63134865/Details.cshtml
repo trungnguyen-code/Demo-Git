@@ -1,0 +1,106 @@
+﻿    @model Project_63134865.Models.SanPham
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutQuanLy_63134865.cshtml";
+}
+
+<h2 style="color: #0094ff ; font-size: 30px; font:bold; ">Chi tiết sản phẩm</h2>
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Tên sản phẩm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSP)
+        </dd>
+
+        <dt>
+            Size
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SizeSP)
+        </dd>
+
+        <dt>
+            Giá
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaSP)
+        </dd>
+
+        <dt>
+            Giảm %
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiamGiaSP)
+        </dd>
+
+        <dt>
+            Ảnh
+        </dt>
+
+        <dd>
+            <img src="@Model.AnhSP" width="100" height="100" />
+        </dd>
+
+        <dt>
+            Ngày cập nhật
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CapNhatNgayThangSP)
+        </dd>
+
+        <dt>
+            Mô tả
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MieuTaSP)
+        </dd>
+
+        <dt>
+            Hãng sản xuất
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HangSanXuat.TenHSX)
+        </dd>
+
+        <dt>
+            Loại sản phẩm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiSanPham.TenLSP)
+        </dd>
+
+        <dt>
+            Mã sản phẩm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaSP)
+        </dd>
+
+        <dt>
+            Tỉ lệ sao
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiLe.TiLeSao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaSP }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b141800551e443948b68ab613b18116b" Name="Diagram1">
+        <EntityTypeShape EntityType="Project_63134865Model.BinhLuan" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63134865Model.DanhMuc" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63134865Model.DonDatHang" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63134865Model.DonDatHangChiTiet" Width="1.5" PointX="10.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63134865Model.HangSanXuat" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63134865Model.KhachHang" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63134865Model.LoaiSanPham" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63134865Model.QuanLy" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63134865Model.SanPham" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63134865Model.sysdiagram" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63134865Model.TiLe" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
+        <AssociationConnector Association="Project_63134865Model.FK__BinhLuan__MaSP__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63134865Model.FK__LoaiSanPha__MaDM__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63134865Model.FK__DonDatHan__MaDDH__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63134865Model.FK__DonDatHan__SdtKH__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63134865Model.FK__DonDatHang__MaSP__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63134865Model.FK__SanPham__MaHSX__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63134865Model.FK__SanPham__MaLSP__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63134865Model.FK__TiLe__MaSP__4CA06362" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

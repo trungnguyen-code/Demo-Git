@@ -1,0 +1,37 @@
+﻿@model Project_63134865.Models.QuanLy
+
+@{
+    ViewBag.Title = "DangNhapQL_63134865";
+    Layout = "~/Views/Shared/_LayoutShop_63134865.cshtml";
+}
+
+<div style="display:flex ; justify-content:center; align-items:center; width:100%;">
+    <div class="">
+        <div class="">
+            <div class="">
+                <div class="fs-1 text-success text-center fw-bold h2">
+                    Đăng Nhập Quản Lý
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("DangNhapQL_63134865", "QuanLyDangNhap_63134865", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group text-danger">@ViewBag.LoginError</div>
+                        <div class="form-group d-flex">
+                            @Html.LabelFor(a => a.TkQL, "Tài khoản")
+                            @Html.TextBoxFor(a => a.TkQL, "", new { @class = "form-control", @placeholder = "Tên quản lý", @name = "TkQL" })
+
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.MkQL, "Mật Khẩu")
+                            @Html.PasswordFor(a => a.MkQL, new { @class = "form-control", @placeholder = "Mật khẩu", @name = "MkQL" })
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-info px-5 py-0" value="Đăng Nhập" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+﻿@model PagedList.IPagedList<Project_63134865.Models.SanPham>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Views/Shared/_LayoutShop_63134865.cshtml";
+}
+@{
+    Project_63134865.Models.Project_63134865Entities db = new Project_63134865.Models.Project_63134865Entities();
+}
+<!--content-->
+<div class="content-top ">
+    <div class="container ">
+        <div class="spec ">
+            <h3 style=" color: #4099ff !important; ">@ViewBag.typeName</h3>
+            <div class="ser-t">
+                <b></b>
+            </div>
+        </div>
+
+        <div class="tab-head ">
+            <div class=" tab-content tab-content-t ">
+                <div class="tab-pane active text-style" id="tab1">
+                    <div class=" con-w3l">
+                        @foreach (var item in Model)
+                        {
+                            int newPrice = Int32.Parse(item.GiaSP) - ((Int32.Parse(item.GiaSP) * item.GiamGiaSP.Value) / 100);
+                            <div class="col-md-3 m-wbox" style="margin-bottom:30px;">
+                                <div class="col-m">
+                                    <a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })" class="offer-img">
+                                        <img src="@item.AnhSP" width="150" height="250" alt="@item.AnhSP">
+
+                                    </a>
+                                    <div class="mid-1">
+                                        <div class="">
+                                            @if (item.TenSP.Length > 23)
+                                            {
+                                                <h6><a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })" data-toggle="tooltip" title="@item.TenSP">@item.TenSP.Substring(0, 23)...</a></h6>
+                                            }
+                                            else
+                                            {
+                                                <h6><a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })">@item.TenSP</a></h6>
+                                            }
+                                        </div>
+                                        (Size: @item.SizeSP)
+                                        <div class="mid-2">
+                                            <p class="item_price">@newPrice.ToString()VNĐ </p>
+                                            <div class="clearfix"></div>
+                                            <div class="block">
+                                                @if (db.TiLes.Find(item.MaSP) != null)
+                                                {
+                                                    for (int i = 0; i < db.TiLes.Find(item.MaSP).TiLeSao; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:rgb(255, 172, 0);" />
+                                                    }
+                                                    for (int i = 0; i < 5 - db.TiLes.Find(item.MaSP).TiLeSao; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int i = 0; i < 5; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                            </div>
+                                            <div>
+                                                <a href="#"><img src="@item.HangSanXuat.AnhHSX" width="20" height="20" /> @item.HangSanXuat.TenHSX</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="add">
+                                            <a class="btn btn-info px-1 py-5" href="@Url.Action("ThemVaoGio", "Shop_63134865", new { SanPhamID = item.MaSP })"> <span></span>  Thêm vào giỏ </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        @Html.PagedListPager(Model, page => Url.Action("SanPhamTheoLSP_63134865", "Shop_63134865", new { page }))
+    </div>
+</div>

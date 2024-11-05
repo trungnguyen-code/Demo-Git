@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Project_63134865Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BinhLuan">
+    <Key>
+      <PropertyRef Name="MaBinhLuan" />
+    </Key>
+    <Property Name="MaBinhLuan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaSP" Type="varchar" MaxLength="50" />
+    <Property Name="TinNhanBinhLuan" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="DanhMuc">
+    <Key>
+      <PropertyRef Name="MaDM" />
+    </Key>
+    <Property Name="MaDM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDM" Type="nvarchar" MaxLength="100" />
+    <Property Name="AnhDM" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="DonDatHang">
+    <Key>
+      <PropertyRef Name="MaDDH" />
+    </Key>
+    <Property Name="MaDDH" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="SdtKH" Type="varchar" MaxLength="20" />
+    <Property Name="TinNhanDDH" Type="nvarchar(max)" />
+    <Property Name="NgayGioDDH" Type="varchar" MaxLength="50" />
+    <Property Name="TrangThaiDDH" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DonDatHangChiTiet">
+    <Key>
+      <PropertyRef Name="MaDDHCT" />
+    </Key>
+    <Property Name="MaDDHCT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaDDH" Type="varchar" MaxLength="20" />
+    <Property Name="MaSP" Type="varchar" MaxLength="50" />
+    <Property Name="SoLuongDDHCT" Type="int" />
+    <Property Name="ThanhTienDDHCT" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HangSanXuat">
+    <Key>
+      <PropertyRef Name="MaHSX" />
+    </Key>
+    <Property Name="MaHSX" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenHSX" Type="nvarchar" MaxLength="100" />
+    <Property Name="SdtHSX" Type="varchar" MaxLength="20" />
+    <Property Name="EmailHSX" Type="varchar" MaxLength="50" />
+    <Property Name="DiaChiHSX" Type="nvarchar(max)" />
+    <Property Name="AnhHSX" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="SdtKH" />
+    </Key>
+    <Property Name="SdtKH" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="HoTenKH" Type="nvarchar" MaxLength="200" />
+    <Property Name="EmailKH" Type="varchar" MaxLength="100" />
+    <Property Name="DiaChiKH" Type="nvarchar" MaxLength="500" />
+    <Property Name="PassKH" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="LoaiSanPham">
+    <Key>
+      <PropertyRef Name="MaLSP" />
+    </Key>
+    <Property Name="MaLSP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaDM" Type="int" />
+    <Property Name="TenLSP" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="QuanLy">
+    <Key>
+      <PropertyRef Name="TkQL" />
+    </Key>
+    <Property Name="TkQL" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="MkQL" Type="varchar" MaxLength="500" />
+    <Property Name="HoTenQL" Type="nvarchar" MaxLength="200" />
+    <Property Name="SdtQL" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="SanPham">
+    <Key>
+      <PropertyRef Name="MaSP" />
+    </Key>
+    <Property Name="MaSP" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MaHSX" Type="int" />
+    <Property Name="MaLSP" Type="int" />
+    <Property Name="TenSP" Type="nvarchar" MaxLength="200" />
+    <Property Name="SizeSP" Type="varchar" MaxLength="10" />
+    <Property Name="GiaSP" Type="varchar" MaxLength="10" />
+    <Property Name="GiamGiaSP" Type="int" />
+    <Property Name="AnhSP" Type="nvarchar(max)" />
+    <Property Name="CapNhatNgayThangSP" Type="varchar" MaxLength="50" />
+    <Property Name="MieuTaSP" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TiLe">
+    <Key>
+      <PropertyRef Name="MaSP" />
+    </Key>
+    <Property Name="MaSP" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TiLeSao" Type="int" />
+  </EntityType>
+  <Association Name="FK__BinhLuan__MaSP__4F7CD00D">
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="0..1" />
+    <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="MaSP" />
+      </Principal>
+      <Dependent Role="BinhLuan">
+        <PropertyRef Name="MaSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DonDatHan__MaDDH__48CFD27E">
+    <End Role="DonDatHang" Type="Self.DonDatHang" Multiplicity="0..1" />
+    <End Role="DonDatHangChiTiet" Type="Self.DonDatHangChiTiet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonDatHang">
+        <PropertyRef Name="MaDDH" />
+      </Principal>
+      <Dependent Role="DonDatHangChiTiet">
+        <PropertyRef Name="MaDDH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DonDatHan__SdtKH__45F365D3">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+    <End Role="DonDatHang" Type="Self.DonDatHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="SdtKH" />
+      </Principal>
+      <Dependent Role="DonDatHang">
+        <PropertyRef Name="SdtKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DonDatHang__MaSP__49C3F6B7">
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="0..1" />
+    <End Role="DonDatHangChiTiet" Type="Self.DonDatHangChiTiet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="MaSP" />
+      </Principal>
+      <Dependent Role="DonDatHangChiTiet">
+        <PropertyRef Name="MaSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LoaiSanPha__MaDM__398D8EEE">
+    <End Role="DanhMuc" Type="Self.DanhMuc" Multiplicity="0..1" />
+    <End Role="LoaiSanPham" Type="Self.LoaiSanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DanhMuc">
+        <PropertyRef Name="MaDM" />
+      </Principal>
+      <Dependent Role="LoaiSanPham">
+        <PropertyRef Name="MaDM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SanPham__MaHSX__3E52440B">
+    <End Role="HangSanXuat" Type="Self.HangSanXuat" Multiplicity="0..1" />
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HangSanXuat">
+        <PropertyRef Name="MaHSX" />
+      </Principal>
+      <Dependent Role="SanPham">
+        <PropertyRef Name="MaHSX" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SanPham__MaLSP__3F466844">
+    <End Role="LoaiSanPham" Type="Self.LoaiSanPham" Multiplicity="0..1" />
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiSanPham">
+        <PropertyRef Name="MaLSP" />
+      </Principal>
+      <Dependent Role="SanPham">
+        <PropertyRef Name="MaLSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TiLe__MaSP__4CA06362">
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
+    <End Role="TiLe" Type="Self.TiLe" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="MaSP" />
+      </Principal>
+      <Dependent Role="TiLe">
+        <PropertyRef Name="MaSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Project_63134865ModelStoreContainer">
+    <EntitySet Name="BinhLuan" EntityType="Self.BinhLuan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DanhMuc" EntityType="Self.DanhMuc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonDatHang" EntityType="Self.DonDatHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonDatHangChiTiet" EntityType="Self.DonDatHangChiTiet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HangSanXuat" EntityType="Self.HangSanXuat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoaiSanPham" EntityType="Self.LoaiSanPham" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuanLy" EntityType="Self.QuanLy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiLe" EntityType="Self.TiLe" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BinhLuan__MaSP__4F7CD00D" Association="Self.FK__BinhLuan__MaSP__4F7CD00D">
+      <End Role="SanPham" EntitySet="SanPham" />
+      <End Role="BinhLuan" EntitySet="BinhLuan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DonDatHan__MaDDH__48CFD27E" Association="Self.FK__DonDatHan__MaDDH__48CFD27E">
+      <End Role="DonDatHang" EntitySet="DonDatHang" />
+      <End Role="DonDatHangChiTiet" EntitySet="DonDatHangChiTiet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DonDatHan__SdtKH__45F365D3" Association="Self.FK__DonDatHan__SdtKH__45F365D3">
+      <End Role="KhachHang" EntitySet="KhachHang" />
+      <End Role="DonDatHang" EntitySet="DonDatHang" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DonDatHang__MaSP__49C3F6B7" Association="Self.FK__DonDatHang__MaSP__49C3F6B7">
+      <End Role="SanPham" EntitySet="SanPham" />
+      <End Role="DonDatHangChiTiet" EntitySet="DonDatHangChiTiet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LoaiSanPha__MaDM__398D8EEE" Association="Self.FK__LoaiSanPha__MaDM__398D8EEE">
+      <End Role="DanhMuc" EntitySet="DanhMuc" />
+      <End Role="LoaiSanPham" EntitySet="LoaiSanPham" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SanPham__MaHSX__3E52440B" Association="Self.FK__SanPham__MaHSX__3E52440B">
+      <End Role="HangSanXuat" EntitySet="HangSanXuat" />
+      <End Role="SanPham" EntitySet="SanPham" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SanPham__MaLSP__3F466844" Association="Self.FK__SanPham__MaLSP__3F466844">
+      <End Role="LoaiSanPham" EntitySet="LoaiSanPham" />
+      <End Role="SanPham" EntitySet="SanPham" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TiLe__MaSP__4CA06362" Association="Self.FK__TiLe__MaSP__4CA06362">
+      <End Role="SanPham" EntitySet="SanPham" />
+      <End Role="TiLe" EntitySet="TiLe" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

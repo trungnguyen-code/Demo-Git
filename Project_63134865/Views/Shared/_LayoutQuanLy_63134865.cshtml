@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My Shopper for Admin</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Bootstrap Core CSS -->
+    <!-- Custom CSS -->
+    <link href="~/Content/Admin/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+
+</head>
+<body>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="color: #0094ff ; font-size: 30px; font:bold; ">Quản Lý Shop</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+
+                @if (Session["TkQL"] != null)
+                {
+                    <!-- /.dropdown -->
+                    <li class="dropdown" style="display:flex; align-items:center;">
+                    <a href="" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-user" aria-hidden="true" style="color: #039445;"></i> <span style="padding-left:5px; ">Admin:</span> @Session["fullName"]</a>
+                    <a href="@Url.Action("DangXuatQL_63134865", "QuanLyDangNhap_63134865")" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-sign-out fa-fw" style="color: #039445 ;"></i> Đăng xuất</a>
+                    <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                }
+             
+
+
+
+            </ul>
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="@Url.Action("TrangChu_63134865", "Shop_63134865")" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-home fa-fw"></i> Trang chủ</a>
+                        </li>
+                        <li>
+                            <a href="#" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-table fa-fw"></i> Quản lý<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("Index", "QuanLyDanhMuc_63134865")" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-th-list fa-fw"></i> Danh mục</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index","QuanLyLoaiSanPham_63134865")" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-tasks fa-fw"></i> Loại sản phẩm</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index","QuanLySanPham_63134865")" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-th-large fa-fw"></i> Sản phẩm</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index","QuanLyHangSanXuat_63134865")" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-glass fa-fw"></i> Hãng sản xuất</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","QuanLyKhachHang_63134865")" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-users fa-fw"></i> Thông tin khách hàng</a>
+                        </li>
+                        <li>
+                            <a href="#" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-table fa-fw"></i> Đơn hàng<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("Index","QuanLyDonHang_63134865")" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-edit fa-fw"></i> Đơn hàng</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index","QuanLyChiTietDonHang_63134865")" style="color: #0094ff; font-size: 17px; font: bold;"><i class="fa fa-edit fa-fw"></i>Chi tiết hóa đơn</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @RenderBody()
+                        
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="~/Content/Admin/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Content/Admin/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/Content/Admin/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Content/Admin/sb-admin-2.js"></script>
+
+</body>
+</html>

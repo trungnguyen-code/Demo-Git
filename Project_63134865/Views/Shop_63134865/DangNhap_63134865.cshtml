@@ -1,0 +1,38 @@
+﻿@model Project_63134865.Models.KhachHang
+
+@{
+    ViewBag.Title = "DangNhap_63134865";
+    Layout = "~/Views/Shared/_LayoutShop_63134865.cshtml";
+}
+
+<div style="display:flex ; justify-content:center; align-items:center; width:100%;">
+    <div class="">
+        <div class="">
+            <div class="">
+                <div class="fs-1 text-success text-center fw-bold h2">
+                    Đăng Nhập
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("DangNhap_63134865", "Shop_63134865", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group text-danger">@ViewBag.LoginError</div>
+                        <div class="form-group d-flex">
+                            @Html.LabelFor(n => n.EmailKH, "Email")
+                            @Html.TextBoxFor(n => n.EmailKH, "", new { @class = "form-control", @placeholder = "Email" , @name = "EmailKH" })
+
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(n => n.PassKH, "Mật Khẩu")
+                            @Html.PasswordFor(n => n.PassKH, new { @class = "form-control", @placeholder = "Mật khẩu" , @name = "PassKH" })
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-info px-5 py-0" value="Đăng Nhập" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

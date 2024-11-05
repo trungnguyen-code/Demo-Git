@@ -1,0 +1,75 @@
+﻿@model List<Project_63134865.Models.CartItem_63134865>
+@{
+    ViewBag.Title = "Giỏ hàng của bạn";
+    Layout = "~/Views/Shared/_LayoutShop_63134865.cshtml";
+}
+<div class="container">
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="spec ">
+            <h3 class="text-success">Giỏ hàng</h3>
+            <div class="ser-t">
+                <b></b>
+            </div>
+        </div>
+        <p class="text-black text-center fw-bold" style="font-size:25px; color: #4099ff !important">
+            Giỏ hàng của bạn trống!
+        </p>
+    }
+    else
+    {
+        <div class="spec ">
+            <h3>Giỏ hàng</h3>
+            <div class="ser-t">
+                <b></b>
+            </div>
+        </div>
+        int total = 0;
+        int i = 0;
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered" style="border: 1px solid #4099ff">
+                        <tr style="border: 1px solid #4099ff; font-size:19px;">
+                            <th style="border: 1px solid #4099ff; font:bold; font-size:15px;">Hình</th>
+                            <th style="border: 1px solid #4099ff; font:bold; font-size:15px;">Tên sản phẩm</th>
+                            <th style="border: 1px solid #4099ff; font:bold; font-size:15px;">Số lượng</th>
+                            <th style="border: 1px solid #4099ff; font:bold; font-size:15px;">Đơn giá</th>
+                            <th style="border: 1px solid #4099ff; font:bold; font-size:15px;">Thành tiền</th>
+                            <th style="border: 1px solid #4099ff; font-size:19px;"></th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr style="border: 1px solid #4099ff; font-size:19px;">
+                                <td class="text-center" style="border: 1px solid #4099ff; font-size:19px;"><img src="@item.Hinh" width="70" height="60" /> </td>
+                                <td style="border: 1px solid #4099ff; font-size:19px;"><a target="" href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id = item.SanPhamID })" style="font-size:medium;"> @item.TenSanPham </a> </td>
+                                <td style="border: 1px solid #4099ff; font-size:19px;">
+                                    <form id="formSoluong_@i" action="@Url.Action("SuaSoLuong","Shop_63134865")" method="get">
+                                        <input type="hidden" name="SanPhamID" value="@item.SanPhamID" />
+                                        <input class="col-lg-4" style="height:30px;" type="number" min="1" step="1" name="soluongmoi" value="@item.SoLuong" onchange="$('#formSoluong_@i').submit();" />
+                                    </form>
+                                </td>
+                                <td style="border: 1px solid #4099ff; font-size:19px;"> @Int32.Parse(item.DonGia).ToString("#,##0") VNĐ </td>
+                                <td style="border: 1px solid #4099ff; font-size:19px;"> @item.ThanhTien.ToString("#,##0") VNĐ </td>
+
+                                <td style="border: 1px solid #4099ff; font-size:19px;"> <a href="@Url.Action("XoaKhoiGio",new { SanPhamID = item.SanPhamID})" onclick="return confirm('Bạn muốn xóa sản phẩm này?');" class="btn btn-danger fw-bold px-5 py-1">Xóa</a> </td>
+                            </tr>
+                            i++;
+                            total += @item.ThanhTien;
+                        }
+                        <tr>
+                            <td style="border: 1px solid #4099ff; font-size:19px;"></td>
+                            <td class="text-right" style="border: 1px solid #4099ff; font-size:19px;"></td>
+                            <td style="border: 1px solid #4099ff; font-size:19px;"></td>
+                            <td class="text-right fw-bold text-success py-1 px-5" style="border: 1px solid #4099ff; font-size:19px;">Tổng thành tiền:</td>
+                            <td style="font-size:large; border: 1px solid #4099ff; font-size:19px;">@total.ToString("#,##0") VNĐ </td>
+                            <td style="border: 1px solid #4099ff; font-size:19px;"><a href="@Url.Action("ThanhToan_63134865", "Shop_63134865")" role="button" class="btn btn-success fw-bold">Thanh toán</a></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    }
+</div>

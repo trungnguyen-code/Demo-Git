@@ -1,0 +1,37 @@
+﻿@model Project_63134865.Models.DanhMuc
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutQuanLy_63134865.cshtml";
+}
+
+<h2 style="color: #0094ff ; font-size: 30px; font:bold; ">Tạo danh mục mới</h2>
+<div>
+
+    @using (Html.BeginForm("Create", "QuanLyDanhMuc_63134865", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true)
+            <div class="text-success">
+                @ViewBag.Create
+            </div>
+            <div class="form-group col-lg-5">
+                <label>Tên danh mục</label>
+                @Html.EditorFor(model => model.TenDM, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên danh mục..." } })
+                <div class="text-danger">@Html.ValidationMessageFor(model => model.TenDM)</div>
+                <label style="margin-top: 20px;">Hình ảnh</label>
+                <input type="file" id="file" name="file" />
+                <div class="text-danger">@ViewBag.HinhAnh</div>
+                <br />
+                <input type="submit" value="Tạo mới" class="btn btn-success" />
+                <div>
+                    <a href="@Url.Action("Index")" class="btn btn-info mt-5" style="margin-top:30px;">Quay lại</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

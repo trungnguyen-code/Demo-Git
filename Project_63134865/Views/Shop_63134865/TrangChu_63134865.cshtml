@@ -1,0 +1,276 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_LayoutShop_63134865.cshtml";
+}
+@{
+    Project_63134865.Models.Project_63134865Entities db = new Project_63134865.Models.Project_63134865Entities();
+}
+
+
+<!-- Owl caro sel -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div data-vide-bg="video/video" style="position: relative;">
+    <div style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; background-size: cover;
+        background-repeat: no-repeat; background-position: 50% 50%; background-image: none;">
+        <video autoplay="autoplay" loop="loop" muted="" style="margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%);
+             visibility: visible; width: 1050px; height: auto; " >
+            <source src="~/Image/trailler.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="container">
+        <div class="banner-info">
+            <div class="search-form">
+                @using (Ajax.BeginForm("TimKiem_63134865", "Shop_63134865", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }))
+                {
+                    <input type="text" style="" placeholder="Tìm kiếm..." name="name">
+                    <button type="submit" class="btn" style=" background: rgba(255, 255, 255, 0.45); padding:10px 80px; margin-top:8px"><i class=" fa fa-search"></i></button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-top ">
+    <div class="container ">
+
+        <div class="spec ">
+            <h3 style=" color: #4099ff !important; ">Sản Phẩm Hot</h3>
+            <div class="ser-t">
+                <b></b>
+            </div>
+        </div>
+        <div class="tab-head ">
+            <div class=" tab-content tab-content-t ">
+                <div class=" active ">
+                    <div>
+                        @{int box = 0;}
+                        @foreach (var item in db.SanPhams.SqlQuery("SELECT * FROM SanPham"))
+                        {
+                            box++;
+                            if (box > 4)
+                            {
+                                break;
+                            }
+                            int newPrice = Int32.Parse(item.GiaSP) - ((Int32.Parse(item.GiaSP) * item.GiamGiaSP.Value) / 100);
+                            <div class="m-wbox col-md-3 mx-auto gx-0 px-0" style="margin-bottom:30px;">
+                                <div class="col-m">
+                                    <a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })" class="offer-img">
+                                        <img src="@item.AnhSP" width="150" height="250" alt="@item.AnhSP">
+
+                                    </a>
+                                    <div class="mid-1">
+                                        <div class="">
+                                            @if (item.TenSP.Length > 25)
+                                            {
+                                                <h6><a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })" data-toggle="tooltip" title="@item.TenSP">@item.TenSP.Substring(0, 25)...</a></h6>
+                                            }
+                                            else
+                                            {
+                                                <h6><a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })">@item.TenSP</a></h6>
+                                            }
+                                        </div>
+                                        (Size: @item.SizeSP)
+                                        <div class="mid-2">
+                                            <p><em class="">@newPrice.ToString() VNĐ</em></p>
+                                            <div class="clearfix"></div>
+                                            <div class="block">
+                                                @if (db.TiLes.Find(item.MaSP) != null)
+                                                {
+                                                    for (int i = 0; i < db.TiLes.Find(item.MaSP).TiLeSao; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:rgb(255, 172, 0);" />
+                                                    }
+                                                    for (int i = 0; i < 5 - db.TiLes.Find(item.MaSP).TiLeSao; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int i = 0; i < 5; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                            </div>
+                                            <div>
+                                                <a href="#"><img src="@item.HangSanXuat.AnhHSX" width="20" height="20" /> @item.HangSanXuat.TenHSX</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="add">
+                                            <a class="btn btn-info py-0 px-5 " href="@Url.Action("ThemVaoGio", "Shop_63134865", new { SanPhamID = item.MaSP })">Thêm vào giỏ </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!--image khuyến mãi-->
+        <div>
+            <ul class="htmlcontent-item-1 row clearfix" style="list-style-type:none;">
+                <li class=" ">
+                    <a class="hoverSlideHome" title="">
+                        <img src="../Image/banner7.jpg" class="item-img rounded-pill" title="" alt="" height="500" style="width:100% ; border-radius:20px;" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <section class="container-fluid">
+                    <div class="owl-carousel review-carousel " style="margin-top:60px ; width:100% ;">
+                        <div class="review-item bg-white p-5 mt-5  mx-auto">
+                          <img src="../Image/banner.jpg" class="item-img rounded-pill" title="" alt="" height="200" style="width:100% ; border-radius:20px;" />
+                        </div>
+                        <div class="review-item bg-white p-5 mt-5 position-relative mx-auto ">
+                            <img src="../Image/banner6.jpg" class="item-img rounded-pill" title="" alt="" height="200" style="width: 100%; border-radius: 20px;"/>
+                        </div>
+                        <div class="review-item bg-white p-5 mt-5 position-relative mx-auto ">
+                            <img src="../Image/banner22.jpg" class="item-img rounded-pill" title="" alt="" height="200" style="width: 100%; border-radius: 20px;"/>
+                        </div>
+                        <div class="review-item bg-white p-5 mt-5 position-relative mx-auto ">
+                            <img src="../Image/banner3.jpg" class="item-img rounded-pill" title="" alt="" height="200" style="width: 100%; border-radius: 20px;"/>
+                        </div>
+                        <div class="review-item bg-white p-5 mt-5 position-relative mx-auto ">
+                            <img src="../Image/banner4.jpg" class="item-img rounded-pill" title="" alt="" height="200" style="width: 100%; border-radius: 20px;"/>
+                        </div>
+                        <div class="review-item bg-white p-5 mt-5 position-relative mx-auto ">
+                            <img src="../Image/banner5.jpg" class="item-img rounded-pill" title="" alt="" height="200" style="width: 100%; border-radius: 20px;"/>
+                        </div>
+                    </div>
+        </section>
+
+        <!--End Image khuyến mãi-->
+        <div class="spec " style="margin-top:30px;">
+            <h3 style=" color: #4099ff !important; ">Sản Phẩm Đang Sale !!!</h3>
+            <div class="ser-t">
+                <b></b>
+            </div>
+        </div>
+        <div class="tab-head ">
+            <div class=" tab-content tab-content-t ">
+                <div class="active ">
+                    <div>
+                        @{int boxkhuyenmai = 0;}
+                        @foreach (var item in db.SanPhams.SqlQuery("SELECT * FROM SanPham ORDER BY GiamGiaSP DESC"))
+                        {
+                            boxkhuyenmai++;
+                            if (boxkhuyenmai > 4)
+                            {
+                                break;
+                            }
+                            int newPrice = Int32.Parse(item.GiaSP) - ((Int32.Parse(item.GiaSP) * item.GiamGiaSP.Value) / 100);
+                            <div class="col-md-3 m-wbox" style="margin-bottom:30px;">
+                                <div class="col-m">
+                                    <a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })" class="offer-img">
+                                        <img src="@item.AnhSP" width="150" height="250" alt="@item.AnhSP">
+                                        @if (Int32.Parse(item.GiaSP) > newPrice)
+                                        {
+                                            <div class="offer"><p><span>Giảm @item.GiamGiaSP %</span></p></div>
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    </a>
+                                    <div class="mid-1">
+                                        <div class="">
+                                            @if (item.TenSP.Length > 25)
+                                            {
+                                                <h6><a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })" data-toggle="tooltip" title="@item.TenSP">@item.TenSP.Substring(0, 25)...</a></h6>
+                                            }
+                                            else
+                                            {
+                                                <h6><a href="@Url.Action("ChiTietSP_63134865", "Shop_63134865", new { id=item.MaSP })">@item.TenSP</a></h6>
+                                            }
+                                        </div>
+                                        (Size: @item.SizeSP)
+                                        <div class="mid-2">
+                                            <p><label>@item.GiaSP VNĐ</label><em class="item_price">@newPrice.ToString() VNĐ</em></p>
+                                            <div class="clearfix"></div>
+                                            <div class="block">
+                                                @if (db.TiLes.Find(item.MaSP) != null)
+                                                {
+                                                    for (int i = 0; i < db.TiLes.Find(item.MaSP).TiLeSao; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:rgb(255, 172, 0);" />
+                                                    }
+                                                    for (int i = 0; i < 5 - db.TiLes.Find(item.MaSP).TiLeSao; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int i = 0; i < 5; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                            </div>
+                                            <div>
+                                                <a href="#"><img src="@item.HangSanXuat.AnhHSX" width="20" height="20" /> @item.HangSanXuat.TenHSX</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="add">
+                                            <a class="btn btn-info py-0 px-5" href="@Url.Action("ThemVaoGio", "Shop_63134865", new { SanPhamID = item.MaSP })"> Thêm vào giỏ </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $('.owl-carousel').owlCarousel({
+        autoplay: true,
+        smartSpeed: 1000,
+        loop: true,
+        center: true,
+        // khi kích thươc nhỏ gọi đến center
+        margin: 10,
+        center: true,
+
+
+       // Những chấm tròn
+
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            1000: {
+                items: 3
+            },
+            2000: {
+                items: 5
+            }
+        }
+    })
+</script>

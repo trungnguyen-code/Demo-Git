@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Hoá đơn";
+    Layout = "~/Views/Shared/_LayoutShop_63134865.cshtml";
+}
+@{
+    Project_63134865.Models.Project_63134865Entities db = new Project_63134865.Models.Project_63134865Entities();
+    var cus = db.KhachHangs.Find(Session["Phone"]);
+}
+<div class="container">
+    <div class="spec ">
+        <h3 style=" color: #4099ff !important; ">Đặt hàng thành công</h3>
+        <h3 style=" color: #4099ff !important; ">Mã hoá đơn: @Session["MHD"]</h3>
+        <div class="ser-t">
+            <b></b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel" style="background: #039445 ; color: white !important">
+            <div class="panel-heading " style="font:bold; font-size:30px; ">
+                Thông tin khách hàng
+            </div>
+            <div class="panel-body">
+                <p style=" color: white !important">
+                    Họ và tên khách: @cus.HoTenKH <br />
+                    Số điện thoại: @Session["Phone"]<br />
+                    Email: @cus.EmailKH<br />
+                    Địa chỉ: @cus.DiaChiKH<br />
+                    Ghi chú: @db.DonDatHangs.Find(Session["MHD"]).TinNhanDDH
+                </p>
+            </div>
+        </div>
+        <div class="panel " style="background: #4099ff ;color: white !important ">
+            <div class="panel-heading " style="font:bold; font-size:30px; ">
+                Thông tin shop: TheBest-Sport
+            </div>
+            <div class="panel-body text-white fs-3">
+                <p style=" color: white !important">
+                    Số điện thoại: 0199999999<br />
+                    Email: abc@gmail.com<br />
+                    Địa chỉ: Nha Trang
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading fw-bold h3" style="color: #4099ff">
+                Sản phẩm
+            </div>
+            <div class="panel-body">
+                <table class="table" style="border: 1px solid #4099ff;">
+                    <thead>
+                        <tr>
+                            <th style="font: bold; font-size: 16px;">STT</th>
+                            <th style="font: bold; font-size: 16px;">Hình ảnh</th>
+                            <th style="font: bold; font-size: 16px;">Tên sản phẩm</th>
+                            <th style="font: bold; font-size: 16px;">Số lượng</th>
+                            <th style="font: bold; font-size: 16px;">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 0;
+                            int tong = 0;
+                        }
+                        @foreach (var item in db.DonDatHangChiTiets.SqlQuery("Select * from DonDatHangChiTiet Where MaDDH='" + Session["MHD"] + "'"))
+                        {
+                            i++;
+                            <tr>
+                                <td style="font-size: 16px;">@i</td>
+                                <td><img src="@item.SanPham.AnhSP" width="50" height="50"></td>
+                                <td style="font-size: 16px; ">@item.SanPham.TenSP</td>
+                                <td style="font-size: 16px; ">@item.SoLuongDDHCT</td>
+                                <td style="font-size: 16px; ">@Int32.Parse(item.ThanhTienDDHCT).ToString("#,##0") VNĐ</td>
+                            </tr>
+                            tong += Int32.Parse(item.ThanhTienDDHCT);
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="font: bold; font-size: 20px; color:  #039445">Tổng tiền:</td>
+                            <td style="font-size: 20px; color: #4099ff; font: bold; ">@tong.ToString("#,##0") VNĐ</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

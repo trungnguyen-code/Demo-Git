@@ -1,0 +1,86 @@
+﻿@model Project_63134865.Models.DonDatHangChiTiet
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutQuanLy_63134865.cshtml";
+}
+
+<h3 style="color: #0094ff ; font-size: 30px; font:bold; ">Bạn có muốn xóa?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Mã đơn hàng:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonDatHang.MaDDH)
+        </dd>
+
+        <dt>
+            Số lượng sản phẩm:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongDDHCT)
+        </dd>
+
+        <dt>
+            Thành tiền:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThanhTienDDHCT)
+        </dd>
+
+        <dt>
+            SDT khách hàng:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonDatHang.SdtKH)
+        </dd>
+
+        <dt>
+            Tên sản phẩm:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SanPham.TenSP)
+        </dd>
+
+        <dt>
+            Ảnh sản phẩm:
+        </dt>
+
+        <dd>
+            <img src="@Model.SanPham.AnhSP" width="100" height="100" />
+        </dd>
+
+        <dt>
+            Mã sản phẩm:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SanPham.MaSP)
+        </dd>
+
+
+        <dt>
+            Trạng thái:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonDatHang.TrangThaiDDH)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>
